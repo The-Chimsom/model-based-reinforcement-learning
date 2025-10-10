@@ -1,0 +1,36 @@
+
+__pycache__/
+*.py[cod]
+*.so
+
+.env/
+env/
+venv/
+.venv/
+anaconda3/
+miniconda3/
+
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Pytest
+.pytest_cache/
+.mypy_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data/logs
+*.log
+*.csv
+*.h5
+*.sqlite3
+*.db
+*.pkl
+*.npy
+*.npz
+*.tmp
+*.bak
