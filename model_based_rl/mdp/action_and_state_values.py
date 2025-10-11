@@ -13,5 +13,11 @@ def compute_state_value(state, policy, gamma=0.90):
     action = policy[state]
     _, next_state, reward, _ = P[state][action][0]
     return reward + gamma * compute_state_value(next_state)
-V = {state: compute_state_value(state) 
+state_value = {state: compute_state_value(state) 
      for state in range(num_states)}
+
+def compute_action_value(state, action, gamma=0.90):
+    if state == terminal_state:
+        return 0
+    _, next_state, reward, _ = P[state][action][0]
+    return reward + gamma * state_value[next_state]
