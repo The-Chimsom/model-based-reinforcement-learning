@@ -5,3 +5,6 @@ def env(env_name: str, render_mode: str ="rgb_array", **kwargs):
     num_actions = env_instance.observation_space.n
     num_states = env_instance.observation_space.n
     return env_instance, num_actions, num_states
+
+def render(env_instance):
+    return env_instance.render()
