@@ -12,4 +12,3 @@ def transition_probs():
             probability, next_state, reward, done = transition
             print(f"Probability: {probability}, Next State: {next_state}, Reward: {reward}, Done: {done}")
             return probability, next_state, reward, done, terminal_states
-transition_probs()
