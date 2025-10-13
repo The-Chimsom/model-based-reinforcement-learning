@@ -60,3 +60,25 @@ def policy_iteration(policy):
             break
         policy = improved_policy
     return policy, V
+
+#Value iteration
+def get_max_action_and_value(state, V):
+    Q_values = [compute_action_value(state, action, V=V) for action in range(num_actions)]
+    max_action = max(range(num_actions), key=lambda action: Q_values[action])
+    max_q_value = Q_values[max_action]
+    return max_action, max_q_value
+
+V = {s: 0 for s in range(num_states)}
+policy = {state: 0 for state in range(num_states - 1)}
+threshold = 0.001
+
+while True:
+    new_V = V.copy()
+    for state in range(num_states -1 ):
+        max_action, max_q_value = get_max_action_and_value(state, V)
+        new_V[state] = max_q_value
+        policy[state] = max_action
+
+        if all(abs(new_V[s] - V[s]) < threshold for s in range(num_states)):
+            break
+    V = new_V
