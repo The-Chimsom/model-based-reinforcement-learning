@@ -12,28 +12,30 @@ def compute_state_value(state, policy, gamma=0.90):
         return 0
     action = policy[state]
     _, next_state, reward, _ = P[state][action][0]
-    return reward + gamma * compute_state_value(next_state)
-state_value = {state: compute_state_value(state) 
+    reward + gamma * compute_state_value(next_state)
+    state_value = {state: compute_state_value(state) 
      for state in range(num_states)}
+    return state_value
 
 def compute_action_value(state, action, gamma=0.90, **kwargs):
     if state == terminal_state:
         return 0
     _, next_state, reward, _ = P[state][action][0]
-    return reward + gamma * state_value[next_state]
+    policy = {s: 0 for s in range(num_states)}
+    reward + gamma * compute_state_value(next_state, policy)
 
-Q_values = {(state, action): compute_action_value(state, action) 
+    Q_values = {(state, action): compute_action_value(state, action) 
      for state in range(num_states) 
      for action in range(num_actions)}
+    return Q_values
 
 improved_policy = {}
 for state in range(num_states -1):
-    max_action = max(range(num_actions), key=lambda action: Q_values[(state, action)])
+    max_action = max(range(num_actions), key=lambda action: compute_action_value[(state, action)])
     improved_policy[state] = max_action
 
 #policy iteration
 
-policy = {0:1, 1:2, 2:1, 3:1, 4:3, 5:1, 6:2, 7:3}
 
 def policy_evaluation(policy):
     V = {state: compute_state_value (state, policy) 
